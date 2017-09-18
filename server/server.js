@@ -18,11 +18,16 @@ io.on('connection', (socket) => {
     socket.emit('newMessage', {
         from: 'mike@example.com',
         text: 'Can you join at 6 PM',
-        createAt: 123
+        createdAt: 123
     });
 
     socket.on('createMessage', (newMessage) => {
         console.log('createMessage', newMessage);
+        io.emit('newMessage', {
+            from: newMessage.from,
+            text: newMessage.text,
+            createdAt: new Date().getTime()
+        });
     });
 
     socket.on('disconnect', () => {
