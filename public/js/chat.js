@@ -69,13 +69,14 @@ socket.on('newLocationMessage', function (message) {
     scrollToBottom();
 });
 
-var messageTextbox = jQuery('[name=message]');
+
 
 jQuery('#message-form').on('submit', function (e) {
-    e.preventDefault();
-    console.log('In jQuery..');
-    socket.emit('createMessage', {
-        from: 'User',
+        e.preventDefault();
+
+        var messageTextbox = jQuery('[name=message]');
+
+        socket.emit('createMessage', {
         text: messageTextbox.val()
     }, function () {
         messageTextbox.val('');
